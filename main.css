@@ -1,5 +1,5 @@
 /* General Body Styling */
-body {
+ .body {
   font-family: 'Courier New', Courier, monospace;
   background-color: #00ffe6; /* Custom background color */
   display: flex;
