@@ -1,11 +1,11 @@
-let taskCount = 0;
-let completedCount = 0;
-
 document.addEventListener('DOMContentLoaded', function() {
+    let taskCount = 0;
+    let completedCount = 0;
 
+    // Add task function
     function addTask() {
         const taskInput = document.getElementById('task');
-        const taskText = taskInput.value;
+        const taskText = taskInput.value.trim();
         if (taskText === '') return;
 
         taskCount++;
@@ -29,75 +29,73 @@ document.addEventListener('DOMContentLoaded', function() {
         updateCounter();
     }
 
-    window.addTask = addTask;
-});
-
-function toggleStatus(el) {
-    const row = el.parentElement; 
-    const taskText = row.querySelector('.task-text');
-    
-    if (el.textContent === '✔️') {
-        row.style.textDecoration = 'line-through'; 
-        el.style.color = 'blue'; 
-        completedCount++;
-    } else {
-        row.style.textDecoration = 'none';  
-        el.style.color = 'green'; 
-        completedCount--;
+    // Toggle task status between completed and pending
+    function toggleStatus(el) {
+        const row = el.parentElement;
+        const taskText = row.querySelector('.task-text');
+        
+        if (el.textContent === '✔️') {
+            row.style.textDecoration = 'line-through';
+            el.style.color = 'blue';
+            completedCount++;
+        } else {
+            row.style.textDecoration = 'none';
+            el.style.color = 'green';
+            completedCount--;
+        }
+        updateCounter();
     }
-    updateCounter();
-}
 
-function deleteTask(el) {
-    const row = el.parentElement; // Get the row (tr) that contains the delete button
-    const status = row.querySelector('.status').textContent;
-    
-    // If the task is marked as completed, reduce the completed count
-    if (status === '✔️') {
-        completedCount--;
+    // Delete task function
+    function deleteTask(el) {
+        const row = el.parentElement;
+        const status = row.querySelector('.status').textContent;
+        if (status === '✔️') completedCount--;
+        taskCount--;
+        row.remove();
+        updateCounter();
     }
-    
-    // Decrease the task count and remove the row from the table
-    taskCount--;
-    row.remove();
-    
-    // Update the task list counter
-    updateCounter();
-}
 
-function editTask(el) {
-    const row = el.parentElement;
-    const taskText = row.querySelector('.task-text');
-    const currentText = taskText.textContent;
+    // Edit task function
+    function editTask(el) {
+        const row = el.parentElement;
+        const taskText = row.querySelector('.task-text');
+        const currentText = taskText.textContent;
 
-    // Create an input field for editing
-    const inputField = document.createElement('input');
-    inputField.type = 'text';
-    inputField.value = currentText;
-    inputField.classList.add('p-2', 'border', 'border-gray-300', 'rounded-md', 'w-full');
+        const inputField = document.createElement('input');
+        inputField.type = 'text';
+        inputField.value = currentText;
+        inputField.classList.add('p-2', 'border', 'border-gray-300', 'rounded-md', 'w-full');
 
-    taskText.innerHTML = '';
-    taskText.appendChild(inputField);
+        taskText.innerHTML = '';
+        taskText.appendChild(inputField);
 
-    // Change the button to a save button
-    el.innerHTML = '💾';
-    
-    // Handle saving the updated task text
-    el.onclick = function () {
-        const newText = inputField.value;
-        taskText.textContent = newText;
+        el.innerHTML = '💾';
 
-        // Change the button back to edit mode
-        el.innerHTML = '✏️';
-
-        // Revert the edit button to its original functionality
         el.onclick = function () {
-            editTask(el);
-        };
-    };
-}
+            const newText = inputField.value;
+            taskText.textContent = newText;
 
-function updateCounter() {
-    const counter = document.querySelector('.counter');
-    counter.textContent = `${taskCount} Total, ${completedCount} Completed, ${taskCount - completedCount} Pending`;
-}
+            el.innerHTML = '✏️';
+
+            el.onclick = function () {
+                editTask(el);
+            };
+        };
+    }
+
+    // Update task counter function
+    function updateCounter() {
+        const counter = document.querySelector('.counter');
+        counter.textContent = `${taskCount} Total, ${completedCount} Completed, ${taskCount - completedCount} Pending`;
+    }
+
+    // Event listener for add task button
+    const addTaskBtn = document.getElementById('add-task-btn');
+    addTaskBtn.addEventListener('click', addTask);
+
+    // Expose functions to global scope
+    window.toggleStatus = toggleStatus;
+    window.deleteTask = deleteTask;
+    window.editTask = editTask;
+});
