@@ -1,6 +1,7 @@
+let taskCount = 0;
+let completedCount = 0;
+
 document.addEventListener('DOMContentLoaded', function() {
-    let taskCount = 0;
-    let completedCount = 0;
 
     function addTask() {
         const taskInput = document.getElementById('task');
@@ -36,7 +37,6 @@ function toggleStatus(el) {
     const taskText = row.querySelector('.task-text');
     
     if (el.textContent === '✔️') {
-       
         row.style.textDecoration = 'line-through'; 
         el.style.color = 'blue'; 
         completedCount++;
@@ -49,11 +49,19 @@ function toggleStatus(el) {
 }
 
 function deleteTask(el) {
-    const row = el.parentElement;
+    const row = el.parentElement; // Get the row (tr) that contains the delete button
     const status = row.querySelector('.status').textContent;
-    if (status === '✔️') completedCount--;
+    
+    // If the task is marked as completed, reduce the completed count
+    if (status === '✔️') {
+        completedCount--;
+    }
+    
+    // Decrease the task count and remove the row from the table
     taskCount--;
     row.remove();
+    
+    // Update the task list counter
     updateCounter();
 }
 
@@ -62,7 +70,7 @@ function editTask(el) {
     const taskText = row.querySelector('.task-text');
     const currentText = taskText.textContent;
 
-   
+    // Create an input field for editing
     const inputField = document.createElement('input');
     inputField.type = 'text';
     inputField.value = currentText;
@@ -71,16 +79,18 @@ function editTask(el) {
     taskText.innerHTML = '';
     taskText.appendChild(inputField);
 
+    // Change the button to a save button
     el.innerHTML = '💾';
-
     
+    // Handle saving the updated task text
     el.onclick = function () {
         const newText = inputField.value;
         taskText.textContent = newText;
 
+        // Change the button back to edit mode
         el.innerHTML = '✏️';
 
-       
+        // Revert the edit button to its original functionality
         el.onclick = function () {
             editTask(el);
         };

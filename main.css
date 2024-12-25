@@ -1,5 +1,5 @@
 
- .body {
+.body {
   font-family: 'Courier New', Courier, monospace;
   background-color: #00ffe6; /* Custom background color */
   display: flex;
@@ -107,7 +107,7 @@ th {
   color: #63b3ed;
 }
 
-
+/* Button hover effect */
 button:hover {
-  background-color: #319795; /
+  background-color: #319795;
 }
