@@ -1,32 +1,35 @@
-let taskCount = 0;
-let completedCount = 0;
+document.addEventListener('DOMContentLoaded', function() {
+    let taskCount = 0;
+    let completedCount = 0;
 
-function addTask() {
-    const taskInput = document.getElementById('task');
-    const taskText = taskInput.value;
-    if (taskText === '') return;
+    function addTask() {
+        const taskInput = document.getElementById('task');
+        const taskText = taskInput.value;
+        if (taskText === '') return;
 
-    taskCount++;
-    const date = new Date().toLocaleDateString();
-    const taskList = document.getElementById('task-list');
-    const row = document.createElement('tr');
-    
-   
-    row.setAttribute('data-id', taskCount);
+        taskCount++;
+        const date = new Date().toLocaleDateString();
+        const taskList = document.getElementById('task-list');
+        const row = document.createElement('tr');
+        
+        row.setAttribute('data-id', taskCount);
 
-    row.innerHTML = `
-        <td>${taskCount}</td>
-        <td><span class="task-text">${taskText}</span></td>
-        <td>${date}</td>
-        <td class="status" onclick="toggleStatus(this)">✔️</td>
-        <td class="delete" onclick="deleteTask(this)">❌</td>
-        <td class="edit" onclick="editTask(this)">✏️</td>
-    `;
-    taskList.appendChild(row);
+        row.innerHTML = `
+            <td>${taskCount}</td>
+            <td><span class="task-text">${taskText}</span></td>
+            <td>${date}</td>
+            <td class="status" onclick="toggleStatus(this)">✔️</td>
+            <td class="delete" onclick="deleteTask(this)">❌</td>
+            <td class="edit" onclick="editTask(this)">✏️</td>
+        `;
+        taskList.appendChild(row);
 
-    taskInput.value = '';
-    updateCounter();
-}
+        taskInput.value = '';
+        updateCounter();
+    }
+
+    window.addTask = addTask;
+});
 
 function toggleStatus(el) {
     const row = el.parentElement; 
