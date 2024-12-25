@@ -73,7 +73,7 @@ function editTask(el) {
 
     el.innerHTML = '💾';
 
-    // Save the changes
+    
     el.onclick = function () {
         const newText = inputField.value;
         taskText.textContent = newText;

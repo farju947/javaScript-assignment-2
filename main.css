@@ -1,4 +1,4 @@
-/* General Body Styling */
+
  .body {
   font-family: 'Courier New', Courier, monospace;
   background-color: #00ffe6; /* Custom background color */
@@ -31,7 +31,7 @@ h1 {
   font-size: 24px;
   font-weight: bold;
   text-align: center;
-  color: #2d3748; /* Darker text color for better contrast */
+  color: #2d3748; 
 }
 
 /* Task Counter Styling */
@@ -40,7 +40,7 @@ h1 {
   font-size: 16px;
   margin-top: 16px;
   margin-bottom: 24px;
-  color: #4a5568; /* Slightly lighter grey color */
+  color: #4a5568; 
 }
 
 /* Input Section Styling */
@@ -53,7 +53,7 @@ h1 {
 
 .task-input input {
   padding: 8px;
-  border: 1px solid #cbd5e0; /* Lighter border */
+  border: 1px solid #cbd5e0; 
   border-radius: 8px;
   width: 100%;
 }
@@ -61,7 +61,7 @@ h1 {
 .task-input button {
   margin-left: 16px;
   padding: 8px 16px;
-  background-color: #38b2ac; /* Teal color for button */
+  background-color: #38b2ac; 
   color: white;
   border-radius: 8px;
   cursor: pointer;
@@ -69,7 +69,7 @@ h1 {
 }
 
 .task-input button:hover {
-  background-color: #319795; /* Darker teal on hover */
+  background-color: #319795; 
 }
 
 /* Table Styling */
@@ -80,34 +80,34 @@ table {
 
 th, td {
   padding: 12px;
-  border-bottom: 1px solid #e2e8f0; /* Light grey border for table */
+  border-bottom: 1px solid #e2e8f0; 
   text-align: left;
 }
 
 th {
   text-align: left;
-  color: #2d3748; /* Dark color for table header */
+  color: #2d3748; 
 }
 
-/* Status Styling */
+
 .status {
   cursor: pointer;
-  color: #48bb78; /* Green color for status */
+  color: #48bb78; 
 }
 
-/* Delete Styling */
+
 .delete {
   cursor: pointer;
-  color: #f56565; /* Red color for delete */
+  color: #f56565; 
 }
 
-/* Edit Styling */
+
 .edit {
   cursor: pointer;
-  color: #63b3ed; /* Blue color for edit */
+  color: #63b3ed;
 }
 
-/* Hover Effects */
+
 button:hover {
-  background-color: #319795; /* Hover effect for button */
+  background-color: #319795; /
 }
